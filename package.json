@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/esack7/BibleLeoApp#readme",
   "dependencies": {
+    "axios": "^0.17.1",
     "babel-plugin-dynamic-import-webpack": "1.0.1",
     "babel-plugin-transform-decorators-legacy": "1.3.4",
     "babel-register": "6.24.1",
@@ -37,6 +38,7 @@
     "redux-thunk": "2.2.0",
     "styled-components": "2.0.0",
     "uglifyjs-webpack-plugin": "^1.1.4",
+    "uuid": "^3.2.1",
     "webpack": "2.6.1",
     "webpack-dev-middleware": "1.10.2",
     "webpack-hot-middleware": "2.18.0"

@@ -3,9 +3,16 @@ const CleanPlugin = require('clean-webpack-plugin');
 const UglifyPlugin = require('uglifyjs-webpack-plugin');
 const path = require('path');
 const webpack = require('webpack');
-require('dotenv').config();
+const Dotenv = require('dotenv-webpack');
 
-let plugins = [new webpack.HotModuleReplacementPlugin(), new webpack.NamedModulesPlugin()];
+let plugins = [
+  new webpack.HotModuleReplacementPlugin(),
+  new webpack.NamedModulesPlugin(),
+  new Dotenv({
+    path: './.env',
+    safe: false
+  })
+];
 let entry = [
   'react-hot-loader/patch',
   'webpack-dev-server/client?http://localhost:8080',
@@ -17,7 +24,7 @@ if (production) {
   plugins = plugins.concat([new CleanPlugin(), new UglifyPlugin()]);
   entry = './public/js/ClientApp.jsx';
 }
-
+console.log(plugins);
 module.exports = {
   plugins,
   context: __dirname,

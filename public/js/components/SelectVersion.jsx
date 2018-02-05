@@ -11,7 +11,6 @@ class SelectVersion extends React.Component{
   }
 
   componentDidMount() {
-    console.log('API_KEY: ', process.env);
     return fetch(`https://api.biblia.com/v1/bible/find?key=${process.env.API_KEY}`)
       .then(res => res.json())
       .then(jsonRes => {

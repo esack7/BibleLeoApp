@@ -28,6 +28,7 @@
     "babel-register": "6.24.1",
     "clean-webpack-plugin": "^0.1.17",
     "dotenv": "^5.0.0",
+    "dotenv-webpack": "^1.5.4",
     "prop-types": "15.5.10",
     "react": "15.5.4",
     "react-addons-perf": "15.4.2",

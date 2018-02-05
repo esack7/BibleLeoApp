@@ -3,6 +3,7 @@ const CleanPlugin = require('clean-webpack-plugin');
 const UglifyPlugin = require('uglifyjs-webpack-plugin');
 const path = require('path');
 const webpack = require('webpack');
+require('dotenv').config();
 
 let plugins = [new webpack.HotModuleReplacementPlugin(), new webpack.NamedModulesPlugin()];
 let entry = [

@@ -5,7 +5,7 @@ class SelectDate extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
-      date: todayDate
+      date: todayDate()
     };
     this.handleChange = this.handleChange.bind(this);
   }

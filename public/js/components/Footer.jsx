@@ -2,7 +2,7 @@ import React from 'react';
 
 const Footer = () => (
   <div>
-    <h1>This is the FOOTER!!!</h1>
+    <h6>&#169; LEO Application</h6>
   </div>
 );
 

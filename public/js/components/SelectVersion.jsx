@@ -7,23 +7,32 @@ class SelectVersion extends React.Component{
     this.state = {
       versions: [],
       error: null,
+      value: 'kjv',
     };
+    this.handleChange = this.handleChange.bind(this);
   }
 
+  
   componentDidMount() {
     return fetch(`https://api.biblia.com/v1/bible/find?key=${process.env.API_KEY}`)
-      .then(res => res.json())
-      .then(jsonRes => {
-        this.setState({
-          versions: jsonRes.bibles
-        })
-      }, error => {
-        this.setState({
-          error
-        })
-      }
-    )
-  }
+    .then(res => res.json())
+    .then(jsonRes => {
+      this.setState({
+        versions: jsonRes.bibles
+      })
+    }, error => {
+      this.setState({
+        error
+      })
+    }
+  )
+}
+
+handleChange(e) {
+  this.setState({
+    value: e.target.value
+  })
+}
 
   render() {
     if(this.state.error) {
@@ -37,7 +46,11 @@ class SelectVersion extends React.Component{
       <div>
         <label htmlFor="version">
         Choose a Bible Version:
-        <select name="version" id="version">
+        <select 
+          onChange={this.handleChange}
+          value={this.state.value}
+          name="version" 
+          id="version">
             {this.state.versions.map((idx) => <option key={uuid()} value={idx.bible}>{idx.title}</option>)}
         </select>
         </label>

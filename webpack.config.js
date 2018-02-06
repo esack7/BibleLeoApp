@@ -24,7 +24,7 @@ if (production) {
   plugins = plugins.concat([new CleanPlugin(), new UglifyPlugin()]);
   entry = './public/js/ClientApp.jsx';
 }
-console.log(plugins);
+
 module.exports = {
   plugins,
   context: __dirname,

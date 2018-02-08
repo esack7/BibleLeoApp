@@ -1,3 +1,9 @@
-export default () => fetch(`https://api.biblia.com/v1/bible/find?key=${process.env.API_KEY}`)
-  .then(x => x.json())
-  .then(y => y.bibles);
+export default (state = [], action) => {
+  console.log('In bibleVersion reducer: ', action);
+  const { type, payload } = action;
+  switch (type) {
+    case 'VERSION_SELECTED': return payload;
+    case 'VERSIONS_FETCHED': return payload;
+    default: return state;
+  }
+};

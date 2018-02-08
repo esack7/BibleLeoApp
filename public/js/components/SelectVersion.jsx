@@ -2,12 +2,14 @@ import React from 'react';
 import uuid from 'uuid/v4';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { versionFetchRequest } from './../actions/version-actions'
 
 class SelectVersion extends React.Component{
   constructor(props){
     super(props);
+    console.log(this.props.versionsFetch());
     this.state = {
-      versions: [],
+      versions: this.props.versionArray ? this.props.versionArray : this.props.versionsFetch,
       error: null,
       value: 'kjv',
     };
@@ -15,11 +17,12 @@ class SelectVersion extends React.Component{
   }
 
   
-componentWillReceiveProps() {
- this.setState({
-   versions: this.props.versionArray
- })
-}
+// componentWillReceiveProps() {
+//   if(this.props.versionArray)
+//  this.setState({
+//    versions: this.props.versionArray
+//  })
+// }
 
 handleChange(e) {
   this.setState({
@@ -55,10 +58,15 @@ handleChange(e) {
 
 SelectVersion.propTypes = {
   versionArray: PropTypes.arrayOf(PropTypes.object).isRequired,
+  versionsFetch: PropTypes.arrayOf(PropTypes.object).isRequired
 }
 
 const mapStateToProps = state => ({
   versionArray: state.versions
 })
 
-export default connect(mapStateToProps)(SelectVersion);
+const mapDispatchToProps = dispatch => ({
+  versionsFetch: () => dispatch(versionFetchRequest())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(SelectVersion);

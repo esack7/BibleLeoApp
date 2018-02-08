@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import uuid from 'uuid/v4';
 import PropTypes from 'prop-types';
-import { selectPlan } from './../actions';
+// import { selectPlan } from './../actions/plan-actions';
 
 class SelectPlan extends React.Component{
   constructor(props) {
@@ -13,9 +13,9 @@ class SelectPlan extends React.Component{
     this.handleChange = this.handleChange.bind(this);
   }
   
-  componentWillReceiveProps() {
-    this.props.planSelect(this.state.value)
-  }
+  // componentWillReceiveProps() {
+  //   this.props.planSelect(this.state.value)
+  // }
 
   handleChange(e) {
     this.setState({
@@ -47,15 +47,15 @@ class SelectPlan extends React.Component{
 
 SelectPlan.propTypes ={
   planArray: PropTypes.arrayOf(PropTypes.object).isRequired,
-  planSelect: PropTypes.func.isRequired,
+  // planSelect: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => ({
   planArray: state.plans
 })
 
-const matchDispatchToProps = dispatch => ({
-  planSelect: plan => dispatch(selectPlan(plan))
-})
+// const mapDispatchToProps = dispatch => ({
+//   planSelect: plan => dispatch(selectPlan(plan))
+// })
 
-export default connect(mapStateToProps, matchDispatchToProps)(SelectPlan);
+export default connect(mapStateToProps)(SelectPlan);

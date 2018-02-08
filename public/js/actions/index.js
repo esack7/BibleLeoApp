@@ -7,3 +7,8 @@ export const selectVersion = version => ({
     type: 'VERSION_SELECTED',
     payload: version
 });
+
+export const selectDate = date => ({
+    type: 'DATE_SELECTED',
+    payload: date
+})

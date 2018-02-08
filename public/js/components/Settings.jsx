@@ -15,6 +15,7 @@ class Settings extends React.Component{
         <SelectDate />
         <SelectPlan />
         <SelectVersion />
+        <button type="submit">Save</button>
       </div>
     )
   }

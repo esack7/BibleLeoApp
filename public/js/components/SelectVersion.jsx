@@ -1,5 +1,7 @@
 import React from 'react';
 import uuid from 'uuid/v4';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 class SelectVersion extends React.Component{
   constructor(props){
@@ -13,19 +15,10 @@ class SelectVersion extends React.Component{
   }
 
   
-  componentDidMount() {
-    return fetch(`https://api.biblia.com/v1/bible/find?key=${process.env.API_KEY}`)
-    .then(res => res.json())
-    .then(jsonRes => {
-      this.setState({
-        versions: jsonRes.bibles
-      })
-    }, error => {
-      this.setState({
-        error
-      })
-    }
-  )
+componentWillReceiveProps() {
+ this.setState({
+   versions: this.props.versionArray
+ })
 }
 
 handleChange(e) {
@@ -35,6 +28,7 @@ handleChange(e) {
 }
 
   render() {
+    // const { versions } = this.props
     if(this.state.error) {
       return(
         <div>
@@ -59,4 +53,12 @@ handleChange(e) {
   }
 }
 
-export default SelectVersion;
+SelectVersion.propTypes = {
+  versionArray: PropTypes.arrayOf(PropTypes.object).isRequired,
+}
+
+const mapStateToProps = state => ({
+  versionArray: state.versions
+})
+
+export default connect(mapStateToProps)(SelectVersion);

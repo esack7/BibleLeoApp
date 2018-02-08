@@ -31,7 +31,7 @@ class ReadingPane extends React.Component {
   }
 
   render() {
-    // console.log('Store: ', this.props.all);
+    console.log('Store: ', this.props.all);
     if(this.state.error) {
       return(
         <div>

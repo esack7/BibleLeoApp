@@ -1,22 +1,53 @@
 import React from 'react';
+import uuid from 'uuid/v4';
+// import PropTypes from 'prop-types';
 
-class ReadingPane extends React.Component{
-  constructor(props){
+class ReadingPane extends React.Component {
+  constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      textArr: [],
+      error: null,
+      version: 'kjv',
+      passage: 'Genesis1.1-3.24'
+    };
   }
+
+  componentDidMount() {
+    return fetch(`https://api.biblia.com/v1/bible/content/${this.state.version}.txt.json?passage=${this.state.passage}&key=${process.env.API_KEY}`)
+      .then(res => res.json())
+      .then(jsonRes => jsonRes.text.split(' \r\n\r\n\r\n\r\n\r\n').map(idx => idx.trim()))
+      .then(
+        text => {
+          this.setState({
+            textArr: text
+          });
+        },
+        error => {
+          this.setState({
+            error
+          });
+        }
+      );
+  }
+
   render() {
-    return(
+    if (this.state.error) {
+      return (
+        <div>
+          <h1>An error has occurred: {this.state.error}</h1>
+        </div>
+      )
+    }
+    return (
       <main>
-        <p>This is where the reading text will appear</p>
-        <p>This is where the reading text will appear</p>
-        <p>This is where the reading text will appear</p>
-        <p>This is where the reading text will appear</p>
-        <p>This is where the reading text will appear</p>
-        <p>This is where the reading text will appear</p>
+        {/* <h3>{this.props.all.plans[0].data[0]}</h3> */}
+        {this.state.textArr.map(para => <p key={uuid()}>{para}</p>)}
       </main>
-    ) 
+    );
   }
 }
+
+// ReadingPane.propTypes = {};
 
 export default ReadingPane;

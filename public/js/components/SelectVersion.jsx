@@ -12,21 +12,6 @@ class SelectVersion extends React.Component{
     this.handleChange = this.handleChange.bind(this);
   }
 
-  
-  componentDidMount() {
-    return fetch(`https://api.biblia.com/v1/bible/find?key=${process.env.API_KEY}`)
-    .then(res => res.json())
-    .then(jsonRes => {
-      this.setState({
-        versions: jsonRes.bibles
-      })
-    }, error => {
-      this.setState({
-        error
-      })
-    }
-  )
-}
 
 handleChange(e) {
   this.setState({

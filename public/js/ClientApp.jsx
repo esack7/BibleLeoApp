@@ -1,15 +1,15 @@
 import React from 'react';
 import { render } from 'react-dom';
-import AppContainer from './components/AppContainer'
+import App from './components/App'
 
 const renderApp = () => {
-  render(<AppContainer />, document.getElementById('app'));
+  render(<App />, document.getElementById('app'));
 };
 
 renderApp();
 
 if (module.hot) {
-  module.hot.accept('./components/AppContainer', () => {
+  module.hot.accept('./components/App', () => {
     renderApp();
   });
 }

@@ -1,11 +1,11 @@
 import React from 'react';
 import todayDate from './../lib/date';
 
-class SelectDate extends React.Component{
+class SelectDate extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      date: todayDate
+      date: todayDate()
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -17,11 +17,11 @@ class SelectDate extends React.Component{
   }
 
   render() {
-    return(
+    return (
       <div>
         <label htmlFor="date">
-        Enter your reading start date
-        <input type="date" name="start" id="date" value={this.state.date} onChange={this.handleChange}/>
+          Enter your reading start date
+        <input type="date" name="start" id="date" value={this.state.date} onChange={this.handleChange} />
         </label>
       </div>
     )

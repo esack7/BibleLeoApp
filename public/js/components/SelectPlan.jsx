@@ -6,14 +6,14 @@ class SelectPlan extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
-      value: 'etb',
+      currentPlan: 'etb',
     };
     this.handleChange = this.handleChange.bind(this);
   }
   
   handleChange(e) {
     this.setState({
-      value: e.target.value
+      currentPlan: e.target.value
     })
   }
 
@@ -25,7 +25,7 @@ class SelectPlan extends React.Component{
         Choose a Reading Plan: 
         <select 
           onChange={this.handleChange}
-          value={this.state.value}
+          value={this.state.currentPlan}
           name="plan" 
           id="plan">
           {planArray.map((idx) => 

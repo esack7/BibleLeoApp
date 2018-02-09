@@ -9,17 +9,16 @@ class Settings extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
-      versions: this.props.versions,
+      // versions: this.props.versions,
     };
   }
   
   render() {
-    console.log('Settings props: ', this.props)
     return(
       <div>
         <SelectDate />
         <SelectPlan planArray={planArray.plansArray}/>
-        <SelectVersion versions={this.state.versions} error={this.props.error}/>
+        <SelectVersion versions={this.props.versions} />
         <button type="submit">Submit</button>
       </div>
     )
@@ -27,8 +26,7 @@ class Settings extends React.Component{
 }
 
 Settings.propTypes = {
-  versions: PropTypes.arrayOf().isRequired,
-  error: PropTypes.oneOfType([null, PropTypes.object]).isRequired,
+  versions: PropTypes.arrayOf(PropTypes.object).isRequired,
 }
 
 export default Settings;

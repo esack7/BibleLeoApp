@@ -1,37 +1,17 @@
 import React from 'react';
 import uuid from 'uuid/v4';
-import superagent from 'superagent';
+// import superagent from 'superagent';
 import PropTypes from 'prop-types';
 
 class ReadingPane extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      textArr: [],
+      // textArr: [],
       error: null,
-      version: this.props.currentVersion,
-      passage: 'Genesis1.1-3.24'
+      // version: this.props.currentVersion,
+      // passage: 'Genesis1.1-3.24'
     };
-  }
-
-  componentDidMount() {
-    return superagent(`https://api.biblia.com/v1/bible/content/${this.state.version}.txt.json`)
-      .query({ passage: this.state.passage })
-      .query({ key: process.env.API_KEY })
-      .then(res => res.body)
-      .then(jsonRes => jsonRes.text.split(' \r\n\r\n\r\n\r\n\r\n').map(idx => idx.trim()))
-      .then(
-        text => {
-          this.setState({
-            textArr: text
-          });
-        },
-        error => {
-          this.setState({
-            error
-          });
-        }
-      );
   }
 
   render() {
@@ -45,14 +25,16 @@ class ReadingPane extends React.Component {
     return (
       <main>
         {/* <h3>{this.props.all.plans[0].data[0]}</h3> */}
-        {this.state.textArr.map(para => <p key={uuid()}>{para}</p>)}
+        {this.props.textArray.map(para => <p key={uuid()}>{para}</p>)}
+        <h1>Here is will be the scripture</h1>
       </main>
     );
   }
 }
 
 ReadingPane.propTypes = {
-  currentVersion: PropTypes.string.isRequired
+  // currentVersion: PropTypes.string.isRequired
+  textArray: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 export default ReadingPane;

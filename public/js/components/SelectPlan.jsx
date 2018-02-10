@@ -5,16 +5,7 @@ import PropTypes from 'prop-types';
 class SelectPlan extends React.Component{
   constructor(props) {
     super(props);
-    this.state = {
-      currentPlan: 'etb',
-    };
-    this.handleChange = this.handleChange.bind(this);
-  }
-  
-  handleChange(e) {
-    this.setState({
-      currentPlan: e.target.value
-    })
+    this.state = {};
   }
 
   render() {
@@ -24,8 +15,8 @@ class SelectPlan extends React.Component{
         <label htmlFor="plan">
         Choose a Reading Plan: 
         <select 
-          onChange={this.handleChange}
-          value={this.state.currentPlan}
+          onChange={this.props.handlePSelect}
+          value={this.props.selected}
           name="plan" 
           id="plan">
           {planArray.map((idx) => 
@@ -41,6 +32,8 @@ class SelectPlan extends React.Component{
 
 SelectPlan.propTypes ={
   planArray: PropTypes.arrayOf(PropTypes.object).isRequired,
+  handlePSelect: PropTypes.func.isRequired,
+  selected: PropTypes.string.isRequired
 }
 
 export default SelectPlan;

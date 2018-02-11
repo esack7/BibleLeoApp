@@ -26,7 +26,7 @@ class ReadingPane extends React.Component {
       <main>
         {/* <h3>{this.props.all.plans[0].data[0]}</h3> */}
         {this.props.textArray.map(para => <p key={uuid()}>{para}</p>)}
-        <h1>Here is will be the scripture</h1>
+        {/* <h1>Here is will be the scripture</h1> */}
       </main>
     );
   }

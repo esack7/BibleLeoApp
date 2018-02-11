@@ -48,7 +48,7 @@ class App extends React.Component {
       currentDate: settings.selectedDate,
       showReading: true
     });
-    MakeCall(settings.selectedVersion, 'John3.16')
+    MakeCall(settings.selectedVersion, settings.selectedPlan, settings.selectedDate)
       .then(text => {
         this.setState({
           textArr: text

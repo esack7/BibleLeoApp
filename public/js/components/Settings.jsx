@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import todayDate from './../lib/date';
+import { todayDate, dateDiff } from './../lib/date';
 import SelectDate from './SelectDate';
 import SelectPlan from './SelectPlan';
 import SelectVersion from './SelectVersion';
@@ -20,6 +20,9 @@ class Settings extends React.Component{
   }
 
   handleSelectedDate(e) {
+    const diff = dateDiff(e.target.value);
+    console.log(dateDiff(e.target.value));
+    console.log(planArray.plansArray.filter(idx => idx.abbv === this.state.selectedPlan)[0].data[diff]);
     this.setState({
       selectedDate: e.target.value
     })

@@ -1,22 +1,11 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import uuid from 'uuid/v4';
 import PropTypes from 'prop-types';
-// import { selectPlan } from './../actions';
 
 class SelectPlan extends React.Component{
   constructor(props) {
     super(props);
-    this.state = {
-      value: 'etb',
-    };
-    this.handleChange = this.handleChange.bind(this);
-  }
-  
-  handleChange(e) {
-    this.setState({
-      value: e.target.value
-    })
+    this.state = {};
   }
 
   render() {
@@ -26,8 +15,8 @@ class SelectPlan extends React.Component{
         <label htmlFor="plan">
         Choose a Reading Plan: 
         <select 
-          onChange={this.handleChange}
-          value={this.state.value}
+          onChange={this.props.handlePSelect}
+          value={this.props.selected}
           name="plan" 
           id="plan">
           {planArray.map((idx) => 
@@ -43,15 +32,8 @@ class SelectPlan extends React.Component{
 
 SelectPlan.propTypes ={
   planArray: PropTypes.arrayOf(PropTypes.object).isRequired,
-  // planSelect: PropTypes.func.isRequired,
+  handlePSelect: PropTypes.func.isRequired,
+  selected: PropTypes.string.isRequired
 }
 
-const mapStateToProps = state => ({
-  planArray: state.plans
-})
-
-// const matchDispatchToProps = dispatch => ({
-//   planSelect: plan => dispatch(selectPlan(plan))
-// })
-
-export default connect(mapStateToProps)(SelectPlan);
+export default SelectPlan;

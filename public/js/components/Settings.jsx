@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import todayDate from './../lib/date';
+import { todayDate, dateDiff } from './../lib/date';
 import SelectDate from './SelectDate';
 import SelectPlan from './SelectPlan';
 import SelectVersion from './SelectVersion';
@@ -20,6 +20,7 @@ class Settings extends React.Component{
   }
 
   handleSelectedDate(e) {
+    console.log(dateDiff(e.target.value));
     this.setState({
       selectedDate: e.target.value
     })

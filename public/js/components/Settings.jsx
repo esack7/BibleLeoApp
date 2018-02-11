@@ -20,7 +20,9 @@ class Settings extends React.Component{
   }
 
   handleSelectedDate(e) {
+    const diff = dateDiff(e.target.value);
     console.log(dateDiff(e.target.value));
+    console.log(planArray.plansArray.filter(idx => idx.abbv === this.state.selectedPlan)[0].data[diff]);
     this.setState({
       selectedDate: e.target.value
     })

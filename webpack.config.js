@@ -2,15 +2,15 @@ const production = process.env.NODE_ENV === 'production';
 const CleanPlugin = require('clean-webpack-plugin');
 const UglifyPlugin = require('uglifyjs-webpack-plugin');
 const path = require('path');
-const webpack = require('webpack');
+const { HotModuleReplacementPlugin, NamedModulesPlugin } = require('webpack');
 const Dotenv = require('dotenv-webpack');
 
 let plugins = [
-  new webpack.HotModuleReplacementPlugin(),
-  new webpack.NamedModulesPlugin(),
+  new HotModuleReplacementPlugin(),
+  new NamedModulesPlugin(),
   new Dotenv({
     path: './.env',
-    safe: false
+    systemvars: false
   })
 ];
 let entry = [

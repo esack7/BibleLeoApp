@@ -9,7 +9,9 @@ const MakeCall = (version, plan, date) => {
     resolve(Plans.plansArray.filter(idx => idx.abbv === plan)[0].data[diff]).catch(error => reject(error))
   )
     .then(scriptArray => {
+      console.log('scriptArray: ', scriptArray);
       [verse] = scriptArray; // need to make dynamic
+      console.log('verse: ', verse);
       return verse;
     })
     .then(() =>

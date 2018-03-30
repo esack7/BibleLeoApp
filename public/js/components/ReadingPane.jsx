@@ -1,16 +1,12 @@
 import React from 'react';
 import uuid from 'uuid/v4';
-// import superagent from 'superagent';
 import PropTypes from 'prop-types';
 
 class ReadingPane extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      // textArr: [],
       error: null,
-      // version: this.props.currentVersion,
-      // passage: 'Genesis1.1-3.24'
     };
   }
 
@@ -24,16 +20,14 @@ class ReadingPane extends React.Component {
     }
     return (
       <main>
-        {/* <h3>{this.props.all.plans[0].data[0]}</h3> */}
+        <h3>Scripture Reference</h3>
         {this.props.textArray.map(para => <p key={uuid()}>{para}</p>)}
-        {/* <h1>Here is will be the scripture</h1> */}
       </main>
     );
   }
 }
 
 ReadingPane.propTypes = {
-  // currentVersion: PropTypes.string.isRequired
   textArray: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 

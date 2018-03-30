@@ -13,14 +13,12 @@ class App extends React.Component {
     this.state = {
       versions: localStorage.versions ? JSON.parse(localStorage.versions) : [],
       error: null,
-      // showSetting: true,
+      showSetting: false,
       showReading: false,
-      currentVersion: 'rvr60',
-      currentPlan: '',
-      currentDate: '',
       textArr: [],
     };
     this.handleSettings = this.handleSettings.bind(this);
+    this.handleHeaderSettingsButton = this.handleHeaderSettingsButton.bind(this);
   }
   componentDidMount() {
     if(this.state.versions[0]) return null;
@@ -42,11 +40,10 @@ class App extends React.Component {
 
   handleSettings(e) {
     const settings =JSON.parse(e.target.value);
+    localStorage.setItem('settings', e.target.value);
     this.setState({ 
-      currentVersion: settings.selectedVersion, 
-      currentPlan: settings.selectedPlan, 
-      currentDate: settings.selectedDate,
-      showReading: true
+      showReading: true,
+      showSetting: false
     });
     MakeCall(settings.selectedVersion, settings.selectedPlan, settings.selectedDate)
       .then(text => {
@@ -56,8 +53,13 @@ class App extends React.Component {
       })
   }
 
+  handleHeaderSettingsButton() {
+    this.setState({
+      showSetting: !this.state.showSetting,
+    })
+  }
+
   render() {
-    // console.log(this.state);
     if (this.state.error) {
       return (
         <div>
@@ -66,17 +68,29 @@ class App extends React.Component {
       )
     }
     if(this.state.showReading) {
+      if(this.state.showSetting){
+        return (
+          <div>
+            <Header 
+              showSettings = {this.handleHeaderSettingsButton}
+            />
+            <Settings 
+              versions={this.state.versions}
+              settingsGrab={this.handleSettings} 
+            />
+            <ReadingPane
+              textArray={this.state.textArr}
+            />
+            <Footer />
+          </div>
+        );
+      }
       return (
         <div>
-          <Header />
-          <Settings 
-            versions={this.state.versions}
-            settingsGrab={this.handleSettings} 
+          <Header
+            showSettings={this.handleHeaderSettingsButton}
           />
-          <ReadingPane 
-            currentVersion={this.state.currentVersion}
-            currentPlan={this.state.currentPlan}
-            currentDate={this.state.currentDate}
+          <ReadingPane
             textArray={this.state.textArr}
           />
           <Footer />
@@ -85,7 +99,9 @@ class App extends React.Component {
     } 
       return (
         <div>
-          <Header />
+          <Header
+            showSettings={this.handleHeaderSettingsButton}
+          />
           <Settings 
             versions={this.state.versions}
             settingsGrab={this.handleSettings} 

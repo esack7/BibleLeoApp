@@ -10,9 +10,9 @@ class Settings extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
-      selectedDate: todayDate(),
-      selectedPlan: 'etb',
-      selectedVersion: 'kjv'
+      selectedDate: localStorage.settings ? JSON.parse(localStorage.settings).selectedDate : todayDate(),
+      selectedPlan: localStorage.settings ? JSON.parse(localStorage.settings).selectedPlan : 'etb',
+      selectedVersion: localStorage.settings ? JSON.parse(localStorage.settings).selectedVersion : 'kjv'
     };
     this.handleSelectedDate =this.handleSelectedDate.bind(this);
     this.handleSelectedPlan = this.handleSelectedPlan.bind(this);

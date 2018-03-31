@@ -1,6 +1,7 @@
 import React from 'react';
 import uuid from 'uuid/v4';
 import PropTypes from 'prop-types';
+import { TextBox, ScriptureReference, VerseParagraph } from '../style/Styles';
 
 class ReadingPane extends React.Component {
   constructor(props) {
@@ -20,8 +21,11 @@ class ReadingPane extends React.Component {
     }
     return (
       <main>
-        <h3>Scripture Reference</h3>
-        {this.props.textArray.map(para => <p key={uuid()}>{para}</p>)}
+        <ScriptureReference>Scripture Reference</ScriptureReference>
+        <TextBox>
+          {this.props.textArray.map(para => <VerseParagraph key={uuid()}>{para}</VerseParagraph>)}
+        </TextBox>
+        <button>Read</button>
       </main>
     );
   }

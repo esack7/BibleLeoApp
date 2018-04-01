@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Title } from '../style/Styles';
 
 class Header extends React.Component{
   constructor(props) {
@@ -9,7 +10,7 @@ class Header extends React.Component{
   render() {
     return (
       <div>
-        <h1>LEO - Reading the Word of God daily</h1>
+        <Title>LEO - Reading the Word of God daily</Title>
         <button
           type="submit"
           onClick={this.props.showSettings}

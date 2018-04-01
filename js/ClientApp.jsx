@@ -1,9 +1,18 @@
 import React from 'react';
 import { render } from 'react-dom';
+import { BrowserRouter } from 'react-router-dom'
+import { BaseStyles, AppContain } from './style/Styles';
 import App from './components/App'
 
 const renderApp = () => {
-  render(<App />, document.getElementById('app'));
+  BaseStyles();
+  render((
+    <BrowserRouter>
+      <AppContain>
+        <App />
+      </AppContain>
+    </BrowserRouter>
+  ), document.getElementById('app'));
 };
 
 renderApp();

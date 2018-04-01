@@ -4,8 +4,6 @@ import Header from './Header';
 import Footer from './Footer';
 import Settings from './Settings';
 import ReadingPane from './ReadingPane';
-import MakeCall from './../lib/scripture-api';
-
 
 class App extends React.Component {
   constructor(props) {
@@ -16,6 +14,9 @@ class App extends React.Component {
       showSetting: false,
       showReading: false,
       textArr: [],
+      selectedDate: '',
+      selectedPlan: '',
+      selectedVersion: '',
     };
     this.handleSettings = this.handleSettings.bind(this);
     this.handleHeaderSettingsButton = this.handleHeaderSettingsButton.bind(this);
@@ -43,14 +44,11 @@ class App extends React.Component {
     localStorage.setItem('settings', e.target.value);
     this.setState({ 
       showReading: true,
-      showSetting: false
+      showSetting: false,
+      selectedDate: settings.selectedDate,
+      selectedPlan: settings.selectedPlan,
+      selectedVersion: settings.selectedVersion,
     });
-    MakeCall(settings.selectedVersion, settings.selectedPlan, settings.selectedDate)
-      .then(text => {
-        this.setState({
-          textArr: text
-        })
-      })
   }
 
   handleHeaderSettingsButton() {
@@ -80,6 +78,9 @@ class App extends React.Component {
             />
             <ReadingPane
               textArray={this.state.textArr}
+              selectedDate={this.state.selectedDate}
+              selectedPlan={this.state.selectedPlan}
+              selectedVersion={this.state.selectedVersion}
             />
             <Footer />
           </div>
@@ -92,6 +93,9 @@ class App extends React.Component {
           />
           <ReadingPane
             textArray={this.state.textArr}
+            selectedDate={this.state.selectedDate}
+            selectedPlan={this.state.selectedPlan}
+            selectedVersion={this.state.selectedVersion}
           />
           <Footer />
         </div>

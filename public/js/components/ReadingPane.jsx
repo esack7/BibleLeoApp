@@ -1,7 +1,7 @@
-import React from 'react';
+import React from 'react'
 import uuid from 'uuid/v4';
 import PropTypes from 'prop-types';
-import { TextBox, ScriptureReference, VerseParagraph } from '../style/Styles';
+import { TextBox, ScriptureReference, VerseParagraph, Notification } from '../style/Styles';
 import Plans from './../../../data/readingplans.json';
 import { dateDiff } from '../lib/date';
 import MakeCall from '../lib/scripture-api';
@@ -18,18 +18,25 @@ class ReadingPane extends React.Component {
       startClicked: false,
     };
     this.handleRead = this.handleRead.bind(this);
-  }
-
-  componentDidMount() {
-    console.log('ReadingPane State: ', this.state);
-    console.log('Iterating thru array', this.state.scriptureArray[this.state.arrayPosition]);
+    this.handleNext = this.handleNext.bind(this);
   }
   
-  handleRead() {
-    console.log('In HandleRead function!!!')
+  handleNext() {
+    this.setState({
+      arrayPosition: this.state.arrayPosition += 1
+    })
     MakeCall(this.state.version, this.state.scriptureArray[this.state.arrayPosition])
       .then(text => {
-        console.log('Value of text in handleRead: ', text);
+        this.setState({
+          textArr: text,
+          startClicked: true,
+        })
+      })
+  }
+
+  handleRead() {
+    MakeCall(this.state.version, this.state.scriptureArray[this.state.arrayPosition])
+      .then(text => {
         this.setState({
           textArr: text,
           startClicked: true,
@@ -45,8 +52,20 @@ class ReadingPane extends React.Component {
         </div>
       )
     }
+
+    if(this.state.startClicked && (this.state.arrayPosition + 1 >= this.state.scriptureArray.length)) {
+      return (
+        <main>
+          <ScriptureReference>{this.state.scriptureArray[this.state.arrayPosition]}</ScriptureReference>
+          <TextBox>
+            {this.state.textArr.map(para => <VerseParagraph key={uuid()}>{para}</VerseParagraph>)}
+          </TextBox>
+          <Notification>* Done reading for the day</Notification>
+        </main>
+      )
+    }
+
     if(this.state.startClicked) {
-      console.log(this.state.textArr)
       return (
         <main>
           <ScriptureReference>{this.state.scriptureArray[this.state.arrayPosition]}</ScriptureReference>
@@ -54,11 +73,12 @@ class ReadingPane extends React.Component {
             {this.state.textArr.map(para => <VerseParagraph key={uuid()}>{para}</VerseParagraph>)}
           </TextBox>
           <button
-            onClick={this.handleRead}
+            onClick={this.handleNext}
           >Next</button>
         </main>
       )
     }
+
     return (
       <main>
         <button
@@ -70,7 +90,6 @@ class ReadingPane extends React.Component {
 }
 
 ReadingPane.propTypes = {
-  // textArray: PropTypes.arrayOf(PropTypes.string).isRequired,
   selectedDate: PropTypes.string.isRequired,
   selectedVersion: PropTypes.string.isRequired,
   selectedPlan: PropTypes.string.isRequired,

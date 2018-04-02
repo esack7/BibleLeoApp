@@ -12,11 +12,10 @@ class App extends React.Component {
       versions: localStorage.versions ? JSON.parse(localStorage.versions) : [],
       error: null,
       showSetting: false,
-      showReading: false,
-      textArr: [],
-      selectedDate: '',
-      selectedPlan: '',
-      selectedVersion: '',
+      showReading: localStorage.settings,
+      selectedDate: localStorage.settings ? JSON.parse(localStorage.settings).selectedDate : '',
+      selectedPlan: localStorage.settings ? JSON.parse(localStorage.settings).selectedPlan : '',
+      selectedVersion: localStorage.settings ? JSON.parse(localStorage.settings).selectedVersion : '',
     };
     this.handleSettings = this.handleSettings.bind(this);
     this.handleHeaderSettingsButton = this.handleHeaderSettingsButton.bind(this);
@@ -77,7 +76,6 @@ class App extends React.Component {
               settingsGrab={this.handleSettings} 
             />
             <ReadingPane
-              textArray={this.state.textArr}
               selectedDate={this.state.selectedDate}
               selectedPlan={this.state.selectedPlan}
               selectedVersion={this.state.selectedVersion}
@@ -92,7 +90,6 @@ class App extends React.Component {
             showSettings={this.handleHeaderSettingsButton}
           />
           <ReadingPane
-            textArray={this.state.textArr}
             selectedDate={this.state.selectedDate}
             selectedPlan={this.state.selectedPlan}
             selectedVersion={this.state.selectedVersion}
@@ -101,17 +98,17 @@ class App extends React.Component {
         </div>
       );
     } 
-      return (
-        <div>
-          <Header
-            showSettings={this.handleHeaderSettingsButton}
-          />
-          <Settings 
-            versions={this.state.versions}
-            settingsGrab={this.handleSettings} 
-          />
-          <Footer />
-        </div>
+    return (
+      <div>
+        <Header
+          showSettings={this.handleHeaderSettingsButton}
+        />
+        <Settings 
+          versions={this.state.versions}
+          settingsGrab={this.handleSettings} 
+        />
+        <Footer />
+      </div>
       );
     
   }

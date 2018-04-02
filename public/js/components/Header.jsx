@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Title } from '../style/Styles';
+import { Title, HeaderComponent } from '../style/Styles';
 
 class Header extends React.Component{
   constructor(props) {
@@ -9,13 +9,13 @@ class Header extends React.Component{
   }
   render() {
     return (
-      <div>
+      <HeaderComponent>
         <Title>LEO - Reading the Word of God daily</Title>
         <button
           type="submit"
           onClick={this.props.showSettings}
         >Settings</button>
-      </div>
+      </HeaderComponent>
     )
   }
 }

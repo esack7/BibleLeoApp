@@ -22,14 +22,13 @@ class App extends React.Component {
   }
   componentDidMount() {
     if(this.state.versions[0]) return null;
-    return superagent(`https://api.biblia.com/v1/bible/find`)
-      .query({ key: process.env.API_KEY })
+    return superagent(`/v1/bible/find`)
       .then(res => res.body)
       .then(jsonRes => {
         this.setState({
-          versions: jsonRes.bibles
+          versions: jsonRes
         });
-        localStorage.setItem('versions', JSON.stringify(jsonRes.bibles))
+        localStorage.setItem('versions', JSON.stringify(jsonRes))
       }, error => {
         this.setState({
           error

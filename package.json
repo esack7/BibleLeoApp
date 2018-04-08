@@ -4,6 +4,7 @@
   "description": "This is the future site of Bible Leo App.  An app that encourages and helps you read the Word of God daily",
   "main": "webpack.config.js",
   "scripts": {
+    "start": "node server.js",
     "deploy": "gh-pages -d public",
     "build": "NODE_ENV=production webpack -p --progress;",
     "watch": "webpack-dev-server --watch",
@@ -30,6 +31,7 @@
     "date-fns": "^1.29.0",
     "dotenv": "^5.0.1",
     "dotenv-webpack": "^1.5.5",
+    "express": "^4.16.3",
     "prop-types": "15.5.10",
     "react": "15.5.4",
     "react-addons-perf": "15.4.2",

@@ -3,20 +3,19 @@ const CleanPlugin = require('clean-webpack-plugin');
 const UglifyPlugin = require('uglifyjs-webpack-plugin');
 const path = require('path');
 const { HotModuleReplacementPlugin, NamedModulesPlugin } = require('webpack');
-const Dotenv = require('dotenv-webpack');
+// const Dotenv = require('dotenv-webpack');
 
 let plugins = [
   new HotModuleReplacementPlugin(),
   new NamedModulesPlugin(),
-  new Dotenv({
-    path: './.env',
-    systemvars: false
-  })
+  // new Dotenv({
+  //   path: './.env',
+  //   systemvars: false
+  // })
 ];
 let entry = [
   'react-hot-loader/patch',
-  'webpack-dev-server/client?http://localhost:8080',
-  'webpack/hot/only-dev-server',
+  'webpack-hot-middleware/client',
   './public/js/ClientApp.jsx'
 ];
 

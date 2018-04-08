@@ -1,11 +1,19 @@
 const express = require('express');
 const request = require('superagent');
+const webpack = require('webpack');
+const webpackConfig = require('./webpack.config.js');
+// const webpackMiddleware = require('webpack-dev-middleware');
+const webpackHotMiddleware = require("webpack-hot-middleware");
 require('dotenv').config()
 
 const app = express();
 const PORT = process.env.PORT || 8080;
 
-app.use(express.static('./public'));
+
+// const wpmw = webpackMiddleware(webpack(webpackConfig), {});
+app.use(webpackHotMiddleware(webpack(webpackConfig)));
+
+app.use(express.static(`${__dirname}/public`));
 
 app.get('/v1/bible/find', (req, res) => {
   request

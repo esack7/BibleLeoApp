@@ -58,7 +58,7 @@ class Settings extends React.Component{
           type="submit"
           onClick={this.props.settingsGrab}
           value={JSON.stringify(this.state)}
-        >Submit</button>
+        >Save</button>
       </div>
     )
   }

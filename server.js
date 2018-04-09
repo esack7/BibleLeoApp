@@ -3,9 +3,9 @@ const request = require('superagent');
 require('dotenv').config()
 
 const app = express();
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 3000;
 
-app.use(express.static('./public'));
+app.use(express.static(`${__dirname}/public`));
 
 app.get('/v1/bible/find', (req, res) => {
   request
